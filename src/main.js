@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
 import './main.scss';
-import fs from "fs";
 
 function Main() {
   useEffect(() => {
-    fs.readFile('https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt', 'utf-8',
-      (e, data) => e ? console.error(e) : console.log(data));
+    try {
+      const rawFile = new XMLHttpRequest();
+      rawFile.open("GET", './text.txt', false);
+      rawFile.onreadystatechange = function () {
+        if (rawFile.readyState === 4) {
+          if (rawFile.status === 200 || rawFile.status == 0) {
+            const allText = rawFile.responseText;
+            for (let i = 0; i < 100; i++) {
+              const filteredText = allText[i];
+              console.log(filteredText);
+            }
+          }
+        }
+      }
+      rawFile.send(null);
+    } catch (e) {
+      console.log(e);
+    }
   }, []);
   return <div className="main">
     <Letter value={window.onkeyup = e => {
