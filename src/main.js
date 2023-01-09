@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './main.scss';
 
 function Main() {
+  const [answer, setAnswer] = useState();
   useEffect(() => {
     try {
       const rawFile = new XMLHttpRequest();
@@ -23,7 +24,8 @@ function Main() {
                 filteredText = '';
               }
             }
-            console.log(textArr[Math.floor((Math.random() * textArr.length))]);
+            console.log("answer : " + textArr[Math.floor((Math.random() * textArr.length))]);
+            setAnswer(textArr[Math.floor((Math.random() * textArr.length))]);
           }
         }
       }
@@ -32,13 +34,18 @@ function Main() {
       console.log(e);
     }
   }, []);
+  let arr = [
+    ['a', 'b', 'o', 'u', 't'],
+  ];
   return <div className="main">
-    <div className="letters 1">
-      <Letter value={''} filled={false} />
-      <Letter value={''} filled={false} />
-      <Letter value={''} filled={false} />
-      <Letter value={''} filled={false} />
-      <Letter value={''} filled={false} />
+    <div className="contents">
+      <div className="letters 1">
+        <Letter value={arr[0][0].toUpperCase()} filled={false} />
+        <Letter value={arr[0][1].toUpperCase()} filled={false} />
+        <Letter value={arr[0][2].toUpperCase()} filled={false} />
+        <Letter value={arr[0][3].toUpperCase()} filled={false} />
+        <Letter value={arr[0][4].toUpperCase()} filled={false} />
+      </div>
     </div>
   </div>
 }
@@ -46,16 +53,19 @@ function Main() {
 function Letter(props) {
   const [filled, setFilled] = useState(props.filled);
   window.onkeyup = e => {
-    if (e.key === 'Enter' || ('z' >= e.key && e.key >= 'a')) {
+    if ('z' >= e.key && e.key >= 'a') {
       console.log(e.key);
       return e.key;
     }
     else if (e.key === 'Backspace') {
       console.log(e.key);
     }
+    else if (e.key === 'Enter') {
+      console.log(e.key);
+    }
   }
   return <div className={`letter${filled ? ' filled' : ''}`}>
-    {props.value ? filled : ''}
+    {props.value}
   </div>
 }
 
