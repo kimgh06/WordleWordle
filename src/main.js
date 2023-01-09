@@ -61,11 +61,11 @@ function Main() {
     <h1>WORDLE!</h1>
     <div className="contents">
       <div className="letters 1">
-        <Letter value={arr[0][0].toUpperCase()} line={0} row={0} color={'gray'} />
-        <Letter value={arr[0][1].toUpperCase()} line={0} row={1} color={'gray'} />
-        <Letter value={arr[0][2].toUpperCase()} line={0} row={2} color={'gray'} />
-        <Letter value={arr[0][3].toUpperCase()} line={0} row={3} color={'gray'} />
-        <Letter value={arr[0][4].toUpperCase()} line={0} row={4} color={'gray'} />
+        <Letter value={arr[0][0].toUpperCase()} color={'gray'} />
+        <Letter value={arr[0][1].toUpperCase()} color={'gray'} />
+        <Letter value={arr[0][2].toUpperCase()} color={'gray'} />
+        <Letter value={arr[0][3].toUpperCase()} color={'gray'} />
+        <Letter value={arr[0][4].toUpperCase()} color={'gray'} />
       </div>
     </div>
   </div>
