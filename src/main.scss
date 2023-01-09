@@ -1,14 +1,22 @@
 .main {
   text-align: center;
 
-  .letters {
-    display: flex;
-  }
+  .contents {
+    width: 480px;
+    margin: auto;
 
-  .letter {
-    background-color: aqua;
-    width: 100px;
-    height: 100px;
-    margin-right: 20px;
+    .letters {
+      display: flex;
+    }
+
+    .letter {
+      font-size: 50px;
+      font-weight: bold;
+      text-align: center;
+      background-color: aqua;
+      width: 80px;
+      height: 80px;
+      margin-right: 20px;
+    }
   }
 }
