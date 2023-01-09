@@ -36,22 +36,28 @@ function Main() {
   }, []);
   let arr = [
     ['a', 'b', 'o', 'u', 't'],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', '']
   ];
   return <div className="main">
+    <h1>WORDLE!</h1>
     <div className="contents">
       <div className="letters 1">
-        <Letter value={arr[0][0].toUpperCase()} filled={false} />
-        <Letter value={arr[0][1].toUpperCase()} filled={false} />
-        <Letter value={arr[0][2].toUpperCase()} filled={false} />
-        <Letter value={arr[0][3].toUpperCase()} filled={false} />
-        <Letter value={arr[0][4].toUpperCase()} filled={false} />
+        <Letter value={arr[0][0].toUpperCase()} line={0} row={0} color={'gray'} />
+        <Letter value={arr[0][1].toUpperCase()} line={0} row={1} color={'gray'} />
+        <Letter value={arr[0][2].toUpperCase()} line={0} row={2} color={'gray'} />
+        <Letter value={arr[0][3].toUpperCase()} line={0} row={3} color={'gray'} />
+        <Letter value={arr[0][4].toUpperCase()} line={0} row={4} color={'gray'} />
       </div>
     </div>
   </div>
 }
 
 function Letter(props) {
-  const [filled, setFilled] = useState(props.filled);
+  const [filled, setFilled] = useState(false);
   window.onkeyup = e => {
     if ('z' >= e.key && e.key >= 'a') {
       console.log(e.key);
