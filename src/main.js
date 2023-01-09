@@ -3,9 +3,11 @@ import './main.scss';
 
 
 function Main() {
+  const [line, setLine] = useState(0);
+  const [row, setRow] = useState(0);
   const [answer, setAnswer] = useState();
   const [arr, setArr] = useState([
-    ['', 'b', 'o', 'u', 't'],
+    ['', '', '', '', ''],
     ['', '', '', '', ''],
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -46,11 +48,13 @@ function Main() {
   window.onkeyup = e => {
     let copy = [...arr];
     if ('z' >= e.key && e.key >= 'a') {
-      copy[0][0] = e.key;
+      setRow(e => e > 3 ? 0 : e + 1);
+      copy[line][row] = e.key;
       setArr(copy);
-      console.log(arr[0][0]);
     }
     else if (e.key === 'Backspace') {
+      copy[line][row] = '';
+      setRow(e => e >= 0 ? e - 1 : 0);
       console.log(e.key);
     }
     else if (e.key === 'Enter') {
