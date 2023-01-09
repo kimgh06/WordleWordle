@@ -23,7 +23,7 @@ function Main() {
                 filteredText = '';
               }
             }
-            console.log(textArr);
+            console.log(textArr[Math.floor((Math.random() * textArr.length))]);
           }
         }
       }
@@ -33,19 +33,28 @@ function Main() {
     }
   }, []);
   return <div className="main">
-    <Letter value={''} filled={false} />
+    <div className="letters 1">
+      <Letter value={''} filled={false} />
+      <Letter value={''} filled={false} />
+      <Letter value={''} filled={false} />
+      <Letter value={''} filled={false} />
+      <Letter value={''} filled={false} />
+    </div>
   </div>
 }
 
 function Letter(props) {
-  const [filled, setFilled] = useState(false);
+  const [filled, setFilled] = useState(props.filled);
   window.onkeyup = e => {
-    if (e.key === 'Backspace' || e.key === 'Enter' || ('z' >= e.key && e.key >= 'a')) {
+    if (e.key === 'Enter' || ('z' >= e.key && e.key >= 'a')) {
       console.log(e.key);
       return e.key;
     }
+    else if (e.key === 'Backspace') {
+      console.log(e.key);
+    }
   }
-  return <div className={"letter" + filled ? "filled" : ''}>
+  return <div className={`letter${filled ? ' filled' : ''}`}>
     {props.value ? filled : ''}
   </div>
 }
