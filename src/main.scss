@@ -1,1 +1,14 @@
-.main {}
+.main {
+  text-align: center;
+
+  .letters {
+    display: flex;
+  }
+
+  .letter {
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+}
