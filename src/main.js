@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import './main.scss';
 
+
 function Main() {
   const [answer, setAnswer] = useState();
+  const [arr, setArr] = useState([
+    ['', 'b', 'o', 'u', 't'],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', '']
+  ]);
   useEffect(() => {
     try {
       const rawFile = new XMLHttpRequest();
@@ -34,14 +43,20 @@ function Main() {
       console.log(e);
     }
   }, []);
-  let arr = [
-    ['a', 'b', 'o', 'u', 't'],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', '']
-  ];
+  window.onkeyup = e => {
+    let copy = [...arr];
+    if ('z' >= e.key && e.key >= 'a') {
+      copy[0][0] = e.key;
+      setArr(copy);
+      console.log(arr[0][0]);
+    }
+    else if (e.key === 'Backspace') {
+      console.log(e.key);
+    }
+    else if (e.key === 'Enter') {
+      console.log(e.key);
+    }
+  }
   return <div className="main">
     <h1>WORDLE!</h1>
     <div className="contents">
@@ -58,18 +73,6 @@ function Main() {
 
 function Letter(props) {
   const [filled, setFilled] = useState(false);
-  window.onkeyup = e => {
-    if ('z' >= e.key && e.key >= 'a') {
-      console.log(e.key);
-      return e.key;
-    }
-    else if (e.key === 'Backspace') {
-      console.log(e.key);
-    }
-    else if (e.key === 'Enter') {
-      console.log(e.key);
-    }
-  }
   return <div className={`letter${filled ? ' filled' : ''}`}>
     {props.value}
   </div>
