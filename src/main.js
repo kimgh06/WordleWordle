@@ -60,6 +60,7 @@ function Main() {
         }
       }
     }
+    return false;
   }
   window.onkeyup = e => {
     let copy = [...arr];
@@ -86,7 +87,7 @@ function Main() {
             console.log(i + '번째 자리 맞음');
             colorArr[line][i] = 'skyblue';
           }
-          else if (isexist()) {//자리가 달라도 같은 글자가 존재할 경우
+          else if (isexist(i)) {//자리가 달라도 같은 글자가 존재할 경우
             console.log(i + '번째 글자는 다른 곳에 이미 존재함');
             colorArr[line][i] = 'darkorange';
           }
