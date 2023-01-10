@@ -3,10 +3,6 @@ import './main.scss';
 
 
 function Main() {
-  const [line, setLine] = useState(0);
-  const [row, setRow] = useState(0);
-  const [answer, setAnswer] = useState();
-  const [updown, setUpdown] = useState('up');
   const [arr, setArr] = useState([
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -22,6 +18,9 @@ function Main() {
     ['', '', '', '', ''],
     ['', '', '', '', ''],
   ])
+  const [line, setLine] = useState(0);
+  const [row, setRow] = useState(0);
+  const [answer, setAnswer] = useState();
   useEffect(() => {
     try {
       const rawFile = new XMLHttpRequest();
@@ -74,7 +73,7 @@ function Main() {
       copy[line][row - 1] = '';
       setRow(e => e > 0 ? e - 1 : 0);
     }
-    else if (e.key === 'Enter' && arr[line].toString().replace(/,/g, '').length) {
+    else if (e.key === 'Enter' && arr[line].toString().replace(/,/g, '').length > 4) {
       if (arr[line].toString().replace(/,/g, '') === answer) { //다 맞을 경우
         for (let i = 0; i < 5; i++) {
           colorArr[line][i] = 'skyblue';
@@ -82,41 +81,57 @@ function Main() {
         alert('correct!');
       }
       else {
-        for (let i = 0; i < 5; i++) {
-          if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
-            console.log(i + '번째 자리 맞음');
-            colorArr[line][i] = 'skyblue';
+        if (true) {//단어장에서 있는지 확인
+          for (let i = 0; i < 5; i++) {
+            if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
+              console.log(i + '번째 자리 맞음');
+              colorArr[line][i] = 'skyblue';
+            }
+            else if (isexist(i)) {//자리가 달라도 같은 글자가 존재할 경우
+              console.log(i + '번째 글자는 다른 곳에 이미 존재함');
+              colorArr[line][i] = 'darkorange';
+            }
+            else {//아예 없을 경우
+              colorArr[line][i] = 'lightgray';
+            }
           }
-          else if (isexist(i)) {//자리가 달라도 같은 글자가 존재할 경우
-            console.log(i + '번째 글자는 다른 곳에 이미 존재함');
-            colorArr[line][i] = 'darkorange';
-          }
-          else {//아예 없을 경우
-            colorArr[line][i] = 'lightgray';
-          }
+          setLine(e => e + 1);
+          setRow(0);
         }
       }
     }
     setArr(() => copy);
-    console.log(line, row, arr[0].toString().replace(/,/g, ''), answer);
+    console.log(line, row, arr[line].toString().replace(/,/g, ''), answer);
   }
   return <div className="main">
     <h1>WORDLE!</h1>
     <div className="contents">
+      <Letters num={0} arr={arr} colorArr={colorArr} />
       <div className="letters 1">
-        <Letter value={arr[0][0].toUpperCase()} color={colorArr[0][0]} />
-        <Letter value={arr[0][1].toUpperCase()} color={colorArr[0][1]} />
-        <Letter value={arr[0][2].toUpperCase()} color={colorArr[0][2]} />
-        <Letter value={arr[0][3].toUpperCase()} color={colorArr[0][3]} />
-        <Letter value={arr[0][4].toUpperCase()} color={colorArr[0][4]} />
+        <Letter value={arr[1][0].toUpperCase()} color={colorArr[1][0]} />
+        <Letter value={arr[1][1].toUpperCase()} color={colorArr[1][1]} />
+        <Letter value={arr[1][2].toUpperCase()} color={colorArr[1][2]} />
+        <Letter value={arr[1][3].toUpperCase()} color={colorArr[1][3]} />
+        <Letter value={arr[1][4].toUpperCase()} color={colorArr[1][4]} />
       </div>
     </div>
   </div>
 }
 
+function Letters(props) {
+  return <div className={`letters ${props.num}`}>
+    <Letter value={props.arr[0][0].toUpperCase()} color={props.colorArr[0][0]} />
+    <Letter value={props.arr[0][1].toUpperCase()} color={props.colorArr[0][1]} />
+    <Letter value={props.arr[0][2].toUpperCase()} color={props.colorArr[0][2]} />
+    <Letter value={props.arr[0][3].toUpperCase()} color={props.colorArr[0][3]} />
+    <Letter value={props.arr[0][4].toUpperCase()} color={props.colorArr[0][4]} />
+  </div>
+}
+
 function Letter(props) {
   const [filled, setFilled] = useState(false);
-  return <div className={`letter${filled ? ' filled' : ''}`} style={{ backgroundColor: props.color }}>
+  return <div className={`letter${filled ? ' filled' : ''}`}
+    style={{ backgroundColor: props.color }}>
     {props.value}
   </div>
 }
