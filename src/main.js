@@ -6,6 +6,7 @@ function Main() {
   const [line, setLine] = useState(0);
   const [row, setRow] = useState(0);
   const [answer, setAnswer] = useState();
+  const [updown, setUpdown] = useState('up');
   const [arr, setArr] = useState([
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -48,18 +49,21 @@ function Main() {
   window.onkeyup = e => {
     let copy = [...arr];
     if ('z' >= e.key && e.key >= 'a') {
-      setRow(e => e > 3 ? 0 : e + 1);
-      copy[line][row] = e.key;
-      setArr(copy);
+      if (row < 5) {
+        copy[line][row] = e.key;
+      }
+      setRow(e => e > 4 ? 5 : e + 1);
     }
     else if (e.key === 'Backspace') {
-      copy[line][row] = '';
-      setRow(e => e >= 0 ? e - 1 : 0);
-      console.log(e.key);
+      copy[line][row - 1] = '';
+      setRow(e => e > 0 ? e - 1 : 0);
     }
     else if (e.key === 'Enter') {
-      console.log(e.key);
+      if (arr[line].toString().replace(/,/g, '') === answer)
+        console.log('correct!');
     }
+    setArr(() => copy);
+    console.log(row, arr[0].toString().replace(/,/g, ''), answer);
   }
   return <div className="main">
     <h1>WORDLE!</h1>
