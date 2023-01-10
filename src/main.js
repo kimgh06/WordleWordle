@@ -16,11 +16,11 @@ function Main() {
     ['', '', '', '', '']
   ]);
   const [colorArr, setColorArr] = useState([
-    ['lightgray', 'skyblue', 'darkorange', 'lightgray', 'lightgray'],
-    ['lightgray', 'lightgray', 'lightgray', 'lightgray', 'lightgray'],
-    ['lightgray', 'lightgray', 'lightgray', 'lightgray', 'lightgray'],
-    ['lightgray', 'lightgray', 'lightgray', 'lightgray', 'lightgray'],
-    ['lightgray', 'lightgray', 'lightgray', 'lightgray', 'lightgray'],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
   ])
   useEffect(() => {
     try {
@@ -52,6 +52,15 @@ function Main() {
       console.log(e);
     }
   }, []);
+  function isexist(i) {
+    for (let j = 0; j < 5; j++) {
+      if (j !== i) {
+        if (arr[line][i] === answer.charAt(j)) {
+          return true;
+        }
+      }
+    }
+  }
   window.onkeyup = e => {
     let copy = [...arr];
     if ('z' >= e.key && e.key >= 'a') {
@@ -64,20 +73,25 @@ function Main() {
       copy[line][row - 1] = '';
       setRow(e => e > 0 ? e - 1 : 0);
     }
-    else if (e.key === 'Enter') {
+    else if (e.key === 'Enter' && arr[line].toString().replace(/,/g, '').length) {
       if (arr[line].toString().replace(/,/g, '') === answer) { //다 맞을 경우
+        for (let i = 0; i < 5; i++) {
+          colorArr[line][i] = 'skyblue';
+        }
         alert('correct!');
       }
       else {
         for (let i = 0; i < 5; i++) {
           if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
             console.log(i + '번째 자리 맞음');
+            colorArr[line][i] = 'skyblue';
           }
-          else if (arr[line]) {//자리가 달라도 같은 글자가 존재할 경우
-
+          else if (isexist()) {//자리가 달라도 같은 글자가 존재할 경우
+            console.log(i + '번째 글자는 다른 곳에 이미 존재함');
+            colorArr[line][i] = 'darkorange';
           }
           else {//아예 없을 경우
-
+            colorArr[line][i] = 'lightgray';
           }
         }
       }
