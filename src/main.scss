@@ -2,11 +2,12 @@
   text-align: center;
 
   .contents {
-    width: 480px;
+    width: 445px;
     margin: auto;
 
     .letters {
       display: flex;
+      margin-bottom: 15px;
     }
 
     .letter {
@@ -14,9 +15,12 @@
       font-size: 50px;
       font-weight: bold;
       text-align: center;
-      width: 80px;
-      height: 80px;
-      margin-right: 20px;
+      width: 75px;
+      height: 75px;
+
+      &+.letter {
+        margin-left: 15px;
+      }
     }
   }
 }

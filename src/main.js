@@ -9,9 +9,11 @@ function Main() {
     ['', '', '', '', ''],
     ['', '', '', '', ''],
     ['', '', '', '', ''],
+    ['', '', '', '', ''],
     ['', '', '', '', '']
   ]);
   const [colorArr, setColorArr] = useState([
+    ['', '', '', '', ''],
     ['', '', '', '', ''],
     ['', '', '', '', ''],
     ['', '', '', '', ''],
@@ -106,25 +108,23 @@ function Main() {
   return <div className="main">
     <h1>WORDLE!</h1>
     <div className="contents">
-      <Letters num={0} arr={arr} colorArr={colorArr} />
-      <div className="letters 1">
-        <Letter value={arr[1][0].toUpperCase()} color={colorArr[1][0]} />
-        <Letter value={arr[1][1].toUpperCase()} color={colorArr[1][1]} />
-        <Letter value={arr[1][2].toUpperCase()} color={colorArr[1][2]} />
-        <Letter value={arr[1][3].toUpperCase()} color={colorArr[1][3]} />
-        <Letter value={arr[1][4].toUpperCase()} color={colorArr[1][4]} />
-      </div>
+      <Letters num={0} arr={arr} colorArr={colorArr} ></Letters>
+      <Letters num={1} arr={arr} colorArr={colorArr} ></Letters>
+      <Letters num={2} arr={arr} colorArr={colorArr} ></Letters>
+      <Letters num={3} arr={arr} colorArr={colorArr} ></Letters>
+      <Letters num={4} arr={arr} colorArr={colorArr} ></Letters>
+      <Letters num={5} arr={arr} colorArr={colorArr} ></Letters>
     </div>
   </div>
 }
 
 function Letters(props) {
   return <div className={`letters ${props.num}`}>
-    <Letter value={props.arr[0][0].toUpperCase()} color={props.colorArr[0][0]} />
-    <Letter value={props.arr[0][1].toUpperCase()} color={props.colorArr[0][1]} />
-    <Letter value={props.arr[0][2].toUpperCase()} color={props.colorArr[0][2]} />
-    <Letter value={props.arr[0][3].toUpperCase()} color={props.colorArr[0][3]} />
-    <Letter value={props.arr[0][4].toUpperCase()} color={props.colorArr[0][4]} />
+    <Letter value={props.arr[props.num][0].toUpperCase()} color={props.colorArr[props.num][0]} />
+    <Letter value={props.arr[props.num][1].toUpperCase()} color={props.colorArr[props.num][1]} />
+    <Letter value={props.arr[props.num][2].toUpperCase()} color={props.colorArr[props.num][2]} />
+    <Letter value={props.arr[props.num][3].toUpperCase()} color={props.colorArr[props.num][3]} />
+    <Letter value={props.arr[props.num][4].toUpperCase()} color={props.colorArr[props.num][4]} />
   </div>
 }
 
