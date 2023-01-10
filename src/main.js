@@ -53,7 +53,7 @@ function Main() {
       console.log(e);
     }
   }, []);
-  function isexist(i) {
+  function isTheLetterExist(i) {
     for (let j = 0; j < 5; j++) {
       if (j !== i) {
         if (arr[line][i] === answer.charAt(j)) {
@@ -90,7 +90,7 @@ function Main() {
               console.log(i + '번째 자리 맞음');
               copiedColor[line][i] = 'skyblue';
             }
-            else if (isexist(i)) {//자리가 달라도 같은 글자가 존재할 경우
+            else if (isTheLetterExist(i)) {//자리가 달라도 같은 글자가 존재할 경우
               console.log(i + '번째 글자는 다른 곳에 이미 존재함');
               copiedColor[line][i] = 'darkorange';
             }
