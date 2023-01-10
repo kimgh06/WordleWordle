@@ -15,6 +15,13 @@ function Main() {
     ['', '', '', '', ''],
     ['', '', '', '', '']
   ]);
+  const [colorArr, setColorArr] = useState([
+    ['lightgray', 'skyblue', 'darkorange', 'lightgray', 'lightgray'],
+    ['lightgray', 'lightgray', 'lightgray', 'lightgray', 'lightgray'],
+    ['lightgray', 'lightgray', 'lightgray', 'lightgray', 'lightgray'],
+    ['lightgray', 'lightgray', 'lightgray', 'lightgray', 'lightgray'],
+    ['lightgray', 'lightgray', 'lightgray', 'lightgray', 'lightgray'],
+  ])
   useEffect(() => {
     try {
       const rawFile = new XMLHttpRequest();
@@ -62,14 +69,16 @@ function Main() {
         alert('correct!');
       }
       else {
-        if (arr[line]) {//같은 글자가 현재 자리에 있을 경우
+        for (let i = 0; i < 5; i++) {
+          if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
+            console.log(i + '번째 자리 맞음');
+          }
+          else if (arr[line]) {//자리가 달라도 같은 글자가 존재할 경우
 
-        }
-        else if (arr[line]) {//자리가 달라도 같은 글자가 존재할 경우
+          }
+          else {//아예 없을 경우
 
-        }
-        else {//아예 없을 경우
-
+          }
         }
       }
     }
@@ -80,11 +89,11 @@ function Main() {
     <h1>WORDLE!</h1>
     <div className="contents">
       <div className="letters 1">
-        <Letter value={arr[0][0].toUpperCase()} color={'lightgray'} />
-        <Letter value={arr[0][1].toUpperCase()} color={'lightgray'} />
-        <Letter value={arr[0][2].toUpperCase()} color={'lightgray'} />
-        <Letter value={arr[0][3].toUpperCase()} color={'lightgray'} />
-        <Letter value={arr[0][4].toUpperCase()} color={'lightgray'} />
+        <Letter value={arr[0][0].toUpperCase()} color={colorArr[0][0]} />
+        <Letter value={arr[0][1].toUpperCase()} color={colorArr[0][1]} />
+        <Letter value={arr[0][2].toUpperCase()} color={colorArr[0][2]} />
+        <Letter value={arr[0][3].toUpperCase()} color={colorArr[0][3]} />
+        <Letter value={arr[0][4].toUpperCase()} color={colorArr[0][4]} />
       </div>
     </div>
   </div>
