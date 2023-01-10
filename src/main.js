@@ -81,10 +81,29 @@ function Main() {
         for (let i = 0; i < 5; i++) {
           copiedColor[line][i] = 'skyblue';
         }
-        alert('correct!');
+        switch (line) {
+          case 0:
+            alert("Genius!");
+            break;
+          case 1:
+            alert('Magnficent!');
+            break;
+          case 2:
+            alert('Impressive!');
+            break;
+          case 3:
+            alert('Splendid!');
+            break;
+          case 4:
+            alert('Great');
+            break;
+          case 5:
+            alert('Phew');
+            break;
+        }
       }
       else {
-        if (true) {//단어장에서 있는지 확인
+        if (true && line < 5) {//단어장에서 있는지 확인
           for (let i = 0; i < 5; i++) {
             if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
               console.log(i + '번째 자리 맞음');
@@ -100,6 +119,9 @@ function Main() {
           }
           setLine(e => e + 1);
           setRow(0);
+        }
+        else {
+          alert(`Answer is ${[answer]}`);
         }
         setColorArr(() => copiedColor);
       }
