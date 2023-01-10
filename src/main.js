@@ -36,7 +36,6 @@ function Main() {
                 filteredText = '';
               }
             }
-            console.log("answer : " + textArr[Math.floor((Math.random() * textArr.length))]);
             setAnswer(textArr[Math.floor((Math.random() * textArr.length))]);
           }
         }
@@ -59,21 +58,33 @@ function Main() {
       setRow(e => e > 0 ? e - 1 : 0);
     }
     else if (e.key === 'Enter') {
-      if (arr[line].toString().replace(/,/g, '') === answer)
-        console.log('correct!');
+      if (arr[line].toString().replace(/,/g, '') === answer) { //다 맞을 경우
+        alert('correct!');
+      }
+      else {
+        if (arr[line]) {//같은 글자가 현재 자리에 있을 경우
+
+        }
+        else if (arr[line]) {//자리가 달라도 같은 글자가 존재할 경우
+
+        }
+        else {//아예 없을 경우
+
+        }
+      }
     }
     setArr(() => copy);
-    console.log(row, arr[0].toString().replace(/,/g, ''), answer);
+    console.log(line, row, arr[0].toString().replace(/,/g, ''), answer);
   }
   return <div className="main">
     <h1>WORDLE!</h1>
     <div className="contents">
       <div className="letters 1">
-        <Letter value={arr[0][0].toUpperCase()} color={'gray'} />
-        <Letter value={arr[0][1].toUpperCase()} color={'gray'} />
-        <Letter value={arr[0][2].toUpperCase()} color={'gray'} />
-        <Letter value={arr[0][3].toUpperCase()} color={'gray'} />
-        <Letter value={arr[0][4].toUpperCase()} color={'gray'} />
+        <Letter value={arr[0][0].toUpperCase()} color={'lightgray'} />
+        <Letter value={arr[0][1].toUpperCase()} color={'lightgray'} />
+        <Letter value={arr[0][2].toUpperCase()} color={'lightgray'} />
+        <Letter value={arr[0][3].toUpperCase()} color={'lightgray'} />
+        <Letter value={arr[0][4].toUpperCase()} color={'lightgray'} />
       </div>
     </div>
   </div>
@@ -81,7 +92,7 @@ function Main() {
 
 function Letter(props) {
   const [filled, setFilled] = useState(false);
-  return <div className={`letter${filled ? ' filled' : ''}`}>
+  return <div className={`letter${filled ? ' filled' : ''}`} style={{ backgroundColor: props.color }}>
     {props.value}
   </div>
 }
