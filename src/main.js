@@ -124,8 +124,19 @@ function Main() {
             setLine(e => e + 1);
             setRow(0);
           }
-          else if (line >= 5) {
-            alert(`Answer is ${[answer]}`);
+          else if (line == 5) {
+            alert(`Answer is '${[answer]}'`);
+            for (let i = 0; i < 5; i++) {
+              if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
+                copiedColor[line][i] = 'skyblue';
+              }
+              else if (isTheLetterExist(i)) {//자리가 달라도 같은 글자가 존재할 경우
+                copiedColor[line][i] = 'darkorange';
+              }
+              else {//아예 없을 경우
+                copiedColor[line][i] = 'lightgray';
+              }
+            }
           }
           else {
             alert(`Please enter a 5 letter word correctly.`)
