@@ -112,11 +112,9 @@ function Main() {
           if (texts.includes(arr[line].toString().replace(/,/g, '')) && line < 5) {//단어장에서 있는지 확인
             for (let i = 0; i < 5; i++) {
               if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
-                console.log(i + '번째 자리 맞음');
                 copiedColor[line][i] = 'skyblue';
               }
               else if (isTheLetterExist(i)) {//자리가 달라도 같은 글자가 존재할 경우
-                console.log(i + '번째 글자는 다른 곳에 이미 존재함');
                 copiedColor[line][i] = 'darkorange';
               }
               else {//아예 없을 경우
