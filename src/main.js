@@ -136,7 +136,7 @@ function Main() {
         }
       }
       setArr(() => copy);
-      console.log(line, row, arr[line].toString().replace(/,/g, ''), answer, texts.includes(arr[line].toString().replace(/,/g, '')));
+      console.log(answer);
     }
   }
   return <div className="main">
