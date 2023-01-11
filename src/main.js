@@ -124,8 +124,7 @@ function Main() {
             setLine(e => e + 1);
             setRow(0);
           }
-          else if (line == 5) {
-            alert(`Answer is '${[answer]}'`);
+          else if (line === 5) {
             for (let i = 0; i < 5; i++) {
               if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
                 copiedColor[line][i] = 'skyblue';
@@ -158,6 +157,12 @@ function Main() {
       <Letters num={4} arr={arr} colorArr={colorArr} ></Letters>
       <Letters num={5} arr={arr} colorArr={colorArr} ></Letters>
     </div>
+    {correct && <div className="corrected">
+      <div className="background" />
+      <div className="popup">
+        <span>answer : {answer}</span>
+      </div>
+    </div>}
   </div>
 }
 
