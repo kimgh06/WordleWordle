@@ -23,6 +23,7 @@ function Main() {
   const [line, setLine] = useState(0);
   const [row, setRow] = useState(0);
   const [answer, setAnswer] = useState();
+  const [texts, setTexts] = useState([]);
   useEffect(() => {
     try {
       const rawFile = new XMLHttpRequest();
@@ -30,8 +31,8 @@ function Main() {
       rawFile.onreadystatechange = function () {
         if (rawFile.readyState === 4) {
           if (rawFile.status === 200 || rawFile.status === 0) {
-            const allText = rawFile.responseText;
             let textArr = [];
+            const allText = rawFile.responseText;
             let filteredText = '';
             for (let i = 0; i < allText.length; i++) {
               if (allText[i] >= 'a') {
@@ -45,6 +46,7 @@ function Main() {
               }
             }
             setAnswer(textArr[Math.floor((Math.random() * textArr.length))]);
+            setTexts(textArr);
           }
         }
       }
@@ -100,6 +102,7 @@ function Main() {
           case 5:
             alert('Phew');
             break;
+          default:
         }
       }
       else {
@@ -127,7 +130,7 @@ function Main() {
       }
     }
     setArr(() => copy);
-    console.log(line, row, arr[line].toString().replace(/,/g, ''), answer);
+    console.log(line, row, arr[line].toString().replace(/,/g, ''), answer, texts.includes(arr[line].toString().replace(/,/g, '')));
   }
   return <div className="main">
     <h1>WORDLE!</h1>
