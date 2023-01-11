@@ -66,6 +66,24 @@ function Main() {
     }
     return false;
   }
+  function RYGenius() {
+    switch (line) {
+      case 0:
+        return "'re Genius!";
+      case 1:
+        return "'re Magnficent!";
+      case 2:
+        return `'re Impressive!`;
+      case 3:
+        return `'re Splendid!`;
+      case 4:
+        return `'re Great`;
+      case 5:
+        return `'re Phew`;
+      default:
+        return ' should need to more practice.';
+    }
+  }
   window.onkeyup = e => {
     if (!correct) {
       let copy = [...arr];
@@ -85,31 +103,10 @@ function Main() {
           for (let i = 0; i < 5; i++) {
             copiedColor[line][i] = 'skyblue';
           }
-          switch (line) {
-            case 0:
-              alert("Genius!");
-              break;
-            case 1:
-              alert('Magnficent!');
-              break;
-            case 2:
-              alert('Impressive!');
-              break;
-            case 3:
-              alert('Splendid!');
-              break;
-            case 4:
-              alert('Great');
-              break;
-            case 5:
-              alert('Phew');
-              break;
-            default:
-          }
           setCorrect(true);
         }
         else {
-          if (texts.includes(arr[line].toString().replace(/,/g, '')) && line < 5) {//단어장에서 있는지 확인
+          if (texts.includes(arr[line].toString().replace(/,/g, '')) && line <= 5) {//단어장에서 있는지 확인
             for (let i = 0; i < 5; i++) {
               if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
                 copiedColor[line][i] = 'skyblue';
@@ -121,10 +118,10 @@ function Main() {
                 copiedColor[line][i] = 'lightgray';
               }
             }
-            setLine(e => e + 1);
+            setLine(e => e <= 5 ? e + 1 : 5);
             setRow(0);
           }
-          else if (line === 5) {
+          else if (line >= 5) {
             for (let i = 0; i < 5; i++) {
               if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
                 copiedColor[line][i] = 'skyblue';
@@ -159,8 +156,9 @@ function Main() {
     </div>
     {correct && <div className="corrected">
       <div className="background" />
-      <div className="popup">
-        <span>answer : {answer}</span>
+      <div className={`popup${correct && ' true'}`}>
+        <p>Answer : {answer}</p>
+        <p>You{RYGenius()}</p>
       </div>
     </div>}
   </div>

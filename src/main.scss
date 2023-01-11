@@ -34,8 +34,21 @@
       background-color: rgba(#000000, 0.20);
     }
 
+    @keyframes popup {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(-100px);
+      }
+    }
+
     .popup {
-      top: 20%;
+      animation: popup 0.5s both;
+      transition: all ease 0.3s;
+      top: 32%;
       left: 32%;
       right: 32%;
       position: absolute;
