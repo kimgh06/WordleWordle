@@ -106,7 +106,7 @@ function Main() {
         }
       }
       else {
-        if (true && line < 5) {//단어장에서 있는지 확인
+        if (texts.includes(arr[line].toString().replace(/,/g, '')) && line < 5) {//단어장에서 있는지 확인
           for (let i = 0; i < 5; i++) {
             if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
               console.log(i + '번째 자리 맞음');
@@ -123,8 +123,11 @@ function Main() {
           setLine(e => e + 1);
           setRow(0);
         }
-        else {
+        else if (line >= 5) {
           alert(`Answer is ${[answer]}`);
+        }
+        else {
+          alert(`Please enter a 5 letter word correctly.`)
         }
         setColorArr(() => copiedColor);
       }
