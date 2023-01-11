@@ -24,6 +24,7 @@ function Main() {
   const [row, setRow] = useState(0);
   const [answer, setAnswer] = useState();
   const [texts, setTexts] = useState([]);
+  const [correct, setCorrect] = useState(false);
   useEffect(() => {
     try {
       const rawFile = new XMLHttpRequest();
@@ -66,74 +67,77 @@ function Main() {
     return false;
   }
   window.onkeyup = e => {
-    let copy = [...arr];
-    if ('z' >= e.key && e.key >= 'a') {
-      if (row < 5) {
-        copy[line][row] = e.key;
-      }
-      setRow(e => e > 4 ? 5 : e + 1);
-    }
-    else if (e.key === 'Backspace') {
-      copy[line][row - 1] = '';
-      setRow(e => e > 0 ? e - 1 : 0);
-    }
-    else if (e.key === 'Enter' && arr[line].toString().replace(/,/g, '').length > 4) {
-      let copiedColor = [...colorArr];
-      if (arr[line].toString().replace(/,/g, '') === answer) { //다 맞을 경우
-        for (let i = 0; i < 5; i++) {
-          copiedColor[line][i] = 'skyblue';
+    if (!correct) {
+      let copy = [...arr];
+      if ('z' >= e.key && e.key >= 'a') {
+        if (row < 5) {
+          copy[line][row] = e.key;
         }
-        switch (line) {
-          case 0:
-            alert("Genius!");
-            break;
-          case 1:
-            alert('Magnficent!');
-            break;
-          case 2:
-            alert('Impressive!');
-            break;
-          case 3:
-            alert('Splendid!');
-            break;
-          case 4:
-            alert('Great');
-            break;
-          case 5:
-            alert('Phew');
-            break;
-          default:
-        }
+        setRow(e => e > 4 ? 5 : e + 1);
       }
-      else {
-        if (texts.includes(arr[line].toString().replace(/,/g, '')) && line < 5) {//단어장에서 있는지 확인
+      else if (e.key === 'Backspace') {
+        copy[line][row - 1] = '';
+        setRow(e => e > 0 ? e - 1 : 0);
+      }
+      else if (e.key === 'Enter' && arr[line].toString().replace(/,/g, '').length > 4) {
+        let copiedColor = [...colorArr];
+        if (arr[line].toString().replace(/,/g, '') === answer) { //다 맞을 경우
           for (let i = 0; i < 5; i++) {
-            if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
-              console.log(i + '번째 자리 맞음');
-              copiedColor[line][i] = 'skyblue';
-            }
-            else if (isTheLetterExist(i)) {//자리가 달라도 같은 글자가 존재할 경우
-              console.log(i + '번째 글자는 다른 곳에 이미 존재함');
-              copiedColor[line][i] = 'darkorange';
-            }
-            else {//아예 없을 경우
-              copiedColor[line][i] = 'lightgray';
-            }
+            copiedColor[line][i] = 'skyblue';
           }
-          setLine(e => e + 1);
-          setRow(0);
-        }
-        else if (line >= 5) {
-          alert(`Answer is ${[answer]}`);
+          switch (line) {
+            case 0:
+              alert("Genius!");
+              break;
+            case 1:
+              alert('Magnficent!');
+              break;
+            case 2:
+              alert('Impressive!');
+              break;
+            case 3:
+              alert('Splendid!');
+              break;
+            case 4:
+              alert('Great');
+              break;
+            case 5:
+              alert('Phew');
+              break;
+            default:
+          }
+          setCorrect(true);
         }
         else {
-          alert(`Please enter a 5 letter word correctly.`)
+          if (texts.includes(arr[line].toString().replace(/,/g, '')) && line < 5) {//단어장에서 있는지 확인
+            for (let i = 0; i < 5; i++) {
+              if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
+                console.log(i + '번째 자리 맞음');
+                copiedColor[line][i] = 'skyblue';
+              }
+              else if (isTheLetterExist(i)) {//자리가 달라도 같은 글자가 존재할 경우
+                console.log(i + '번째 글자는 다른 곳에 이미 존재함');
+                copiedColor[line][i] = 'darkorange';
+              }
+              else {//아예 없을 경우
+                copiedColor[line][i] = 'lightgray';
+              }
+            }
+            setLine(e => e + 1);
+            setRow(0);
+          }
+          else if (line >= 5) {
+            alert(`Answer is ${[answer]}`);
+          }
+          else {
+            alert(`Please enter a 5 letter word correctly.`)
+          }
+          setColorArr(() => copiedColor);
         }
-        setColorArr(() => copiedColor);
       }
+      setArr(() => copy);
+      console.log(line, row, arr[line].toString().replace(/,/g, ''), answer, texts.includes(arr[line].toString().replace(/,/g, '')));
     }
-    setArr(() => copy);
-    console.log(line, row, arr[line].toString().replace(/,/g, ''), answer, texts.includes(arr[line].toString().replace(/,/g, '')));
   }
   return <div className="main">
     <h1>WORDLE!</h1>
