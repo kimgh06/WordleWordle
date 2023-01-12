@@ -54,6 +54,23 @@
       position: absolute;
       background-color: white;
       height: 350px;
+
+      button {
+        height: 40px;
+        width: 80px;
+        font-size: 20px;
+        border-radius: 10px;
+        border: none;
+        background-color: gainsboro;
+
+        &:hover {
+          background-color: lighten(gainsboro, 5%);
+        }
+
+        &:active {
+          background-color: darken(gainsboro, 5%);
+        }
+      }
     }
   }
 }

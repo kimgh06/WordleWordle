@@ -171,7 +171,7 @@ function Main() {
       <div className={`popup${correct && ' true'}`}>
         <p>Answer : {answer}</p>
         <p>You{RYGenius()}</p>
-        <button onClick={initialsetting}>retry</button>
+        <button onClick={initialsetting}>Retry</button>
       </div>
     </div>}
   </div>
