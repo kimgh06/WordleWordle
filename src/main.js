@@ -25,6 +25,7 @@ function Main() {
   const [answer, setAnswer] = useState();
   const [texts, setTexts] = useState([]);
   const [correct, setCorrect] = useState(false);
+  const [havingArr, setHavingArr] = useState([]);
   useEffect(() => {
     try {
       const rawFile = new XMLHttpRequest();
@@ -47,6 +48,7 @@ function Main() {
               }
             }
             setAnswer(textArr[Math.floor((Math.random() * textArr.length))]);
+            setHavingArr([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
             setTexts(textArr);
           }
         }
@@ -57,11 +59,18 @@ function Main() {
     }
   }, []);
   function isTheLetterExist(i) {
+    // for (let k = 0; k < 5; k++) {
+    //   for (let j = 97; j <= 121; j++) {
+    //     if (answer.indexOf(String.fromCharCode(j))) {//존재하면 해당 위치 +1
+    //       havingArr[j - 'a']++;
+    //     }
+    //     console.log(String.fromCharCode(j), answer.indexOf(String.fromCharCode(j)));
+    //   }
+    //   console.log("탈출", k);
+    // }
     for (let j = 0; j < 5; j++) {
-      if (j !== i) {
-        if (arr[line][i] === answer.charAt(j)) {
-          return true;
-        }
+      if (arr[line][i] === answer.charAt(j)) {
+        return true;
       }
     }
     return false;
