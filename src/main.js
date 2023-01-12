@@ -60,22 +60,20 @@ function Main() {
     }
   }, []);
   function isTheLetterExist(i) {
-    if (!isOperated) {//초기 설정
-      isOperated = true;
-      for (let j = 97; j <= 121; j++) {
-        if (answer.indexOf(String.fromCharCode(j)) >= 0) {//존재하면 해당 위치 +1
-          havingArr[j - 97]++;
-        }
-        console.log(String.fromCharCode(j), answer.indexOf(String.fromCharCode(j)));
-      }
-      console.log("탈출", i, havingArr);
-    }
     for (let j = 0; j < 5; j++) {
-      if (arr[line][i] === answer.charAt(j)) {
-        return true;
+      if (arr[line][i] === answer.charAt(j)) {//존재시 
+        for (let k = 0; k < 26; k++) {
+          if (havingArr[k] > 0) {
+            havingArr[k]--;
+            console.log(havingArr);
+            return true;
+          }
+          else {
+            return false;
+          }
+        }
       }
     }
-    return false;
   }
   function RYGenius() {
     switch (line) {
@@ -131,8 +129,24 @@ function Main() {
         }
         else {
           if (texts.includes(arr[line].toString().replace(/,/g, '')) && line <= 5) {//단어장에서 있는지 확인
+            if (!isOperated) {//초기 설정
+              isOperated = true;
+              for (let j = 97; j <= 121; j++) {
+                if (answer.indexOf(String.fromCharCode(j)) >= 0) {//존재하면 해당 위치 +1
+                  havingArr[j - 97]++;
+                }
+                console.log(String.fromCharCode(j), answer.indexOf(String.fromCharCode(j)));
+              }
+              console.log("탈출", havingArr);
+            }
             for (let i = 0; i < 5; i++) {
               if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
+                for (let k = 0; k < 26; k++) {
+                  if (havingArr[k] > 0) {
+                    havingArr[k]--;
+                    console.log(havingArr);
+                  }
+                }
                 copiedColor[line][i] = 'skyblue';
               }
               else if (isTheLetterExist(i)) {//자리가 달라도 같은 글자가 존재할 경우
