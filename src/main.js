@@ -25,14 +25,6 @@ function Main() {
   const [answer, setAnswer] = useState();
   const [texts, setTexts] = useState([]);
   const [correct, setCorrect] = useState(false);
-  const initialarr = [
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-    ['', '', '', '', ''],
-  ]
   useEffect(() => {
     try {
       const rawFile = new XMLHttpRequest();
@@ -103,7 +95,6 @@ function Main() {
     setCorrect(false);
     setLine(0);
     setRow(0);
-    console.log(texts);
   }
   window.onkeyup = e => {
     if (!correct) {
