@@ -25,6 +25,14 @@ function Main() {
   const [answer, setAnswer] = useState();
   const [texts, setTexts] = useState([]);
   const [correct, setCorrect] = useState(false);
+  const initialarr = [
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+    ['', '', '', '', ''],
+  ]
   useEffect(() => {
     try {
       const rawFile = new XMLHttpRequest();
@@ -83,6 +91,15 @@ function Main() {
       default:
         return ' should need to more practice.';
     }
+  }
+  function initialsetting() {
+    setAnswer(texts[Math.floor(Math.random() * texts.length)]);
+    setColorArr(...initialarr);
+    setArr(...initialarr);
+    setCorrect(false);
+    setLine(0);
+    setRow(0);
+    console.log(texts);
   }
   window.onkeyup = e => {
     if (!correct) {
@@ -159,6 +176,7 @@ function Main() {
       <div className={`popup${correct && ' true'}`}>
         <p>Answer : {answer}</p>
         <p>You{RYGenius()}</p>
+        <button onClick={initialsetting}>retry</button>
       </div>
     </div>}
   </div>
