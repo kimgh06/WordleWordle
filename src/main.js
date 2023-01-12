@@ -25,6 +25,7 @@ function Main() {
   const [answer, setAnswer] = useState();
   const [texts, setTexts] = useState([]);
   const [correct, setCorrect] = useState(false);
+  let isOperated = false;
   const [havingArr, setHavingArr] = useState([]);
   useEffect(() => {
     try {
@@ -59,15 +60,16 @@ function Main() {
     }
   }, []);
   function isTheLetterExist(i) {
-    // for (let k = 0; k < 5; k++) {
-    //   for (let j = 97; j <= 121; j++) {
-    //     if (answer.indexOf(String.fromCharCode(j))) {//존재하면 해당 위치 +1
-    //       havingArr[j - 'a']++;
-    //     }
-    //     console.log(String.fromCharCode(j), answer.indexOf(String.fromCharCode(j)));
-    //   }
-    //   console.log("탈출", k);
-    // }
+    if (!isOperated) {//초기 설정
+      isOperated = true;
+      for (let j = 97; j <= 121; j++) {
+        if (answer.indexOf(String.fromCharCode(j)) >= 0) {//존재하면 해당 위치 +1
+          havingArr[j - 97]++;
+        }
+        console.log(String.fromCharCode(j), answer.indexOf(String.fromCharCode(j)));
+      }
+      console.log("탈출", i, havingArr);
+    }
     for (let j = 0; j < 5; j++) {
       if (arr[line][i] === answer.charAt(j)) {
         return true;
@@ -104,6 +106,7 @@ function Main() {
     setCorrect(false);
     setLine(0);
     setRow(0);
+    isOperated = false;
   }
   window.onkeyup = e => {
     if (!correct) {
