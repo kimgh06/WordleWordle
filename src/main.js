@@ -94,8 +94,12 @@ function Main() {
   }
   function initialsetting() {
     setAnswer(texts[Math.floor(Math.random() * texts.length)]);
-    setColorArr(...initialarr);
-    setArr(...initialarr);
+    for (let i = 0; i < 6; i++) {
+      for (let j = 0; j < 5; j++) {
+        colorArr[i][j] = '';
+        arr[i][j] = '';
+      }
+    }
     setCorrect(false);
     setLine(0);
     setRow(0);
