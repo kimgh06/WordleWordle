@@ -68,12 +68,10 @@ function Main() {
             console.log(havingArr);
             return true;
           }
-          else {
-            return false;
-          }
         }
       }
     }
+    return false;
   }
   function RYGenius() {
     switch (line) {
