@@ -133,16 +133,13 @@ function Main() {
                 if (answer.indexOf(String.fromCharCode(j)) >= 0) {//존재하면 해당 위치 +1
                   havingArr[j - 97]++;
                 }
-                // console.log(String.fromCharCode(j), answer.indexOf(String.fromCharCode(j)));
               }
-              // console.log("탈출", havingArr);
             }
             for (let i = 0; i < 5; i++) {
               if (arr[line][i] === answer.charAt(i)) {//같은 글자가 현재 자리에 있을 경우
                 for (let k = 0; k < 26; k++) {
                   if (havingArr[k] > 0) {
                     havingArr[k]--;
-                    // console.log(havingArr);
                   }
                 }
                 copiedColor[line][i] = 'skyblue';
